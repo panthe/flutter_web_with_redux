@@ -12,16 +12,11 @@ class TopBarTabs extends StatelessWidget {
     return LayoutBuilder(
         builder: (context, constraints) {
           return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Container(
-                height: 50.0,
-                width: constraints.maxWidth/2,
-                child: Text(''),
-              ),
-              Container(
-                height: 50.0,
-                width: constraints.maxWidth/2,
+                height: 35.0,
+                width: constraints.maxWidth/4,
                 child: FlatButton(
                   onPressed: () => StoreProvider.of<AppState>(context).dispatch(FetchUser(context: context)),
                   color: Colors.deepOrange,
@@ -29,7 +24,7 @@ class TopBarTabs extends StatelessWidget {
                     "FETCH USER",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 22.0,
+                        fontSize: 18.0,
                         fontWeight: FontWeight.normal
                     ),
                     textAlign: TextAlign.start,

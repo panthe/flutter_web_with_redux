@@ -40,9 +40,6 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: <Widget>[
                     TopBar(),
-                    Divider(
-                        height: 2.0,
-                    ),
                     TopBarTabs(),
                     Expanded(
                       child: GridUsers(),
