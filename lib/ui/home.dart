@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
             child:Center(
               child:Container(
                 constraints: BoxConstraints(
-                  minWidth: 400.0,
+                  minWidth: 480.0,
                   maxWidth: 1024.0,
                   minHeight: 480.0,
                 ),

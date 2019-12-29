@@ -54,19 +54,19 @@ class ViewUser extends StatelessWidget {
           children: [
             ResponsiveGridCol(
               xs: 12,
-              md: 4,
+              md: 6,
               lg: 4,
               child: ViewUserPictureAndName(user:user)
             ),
             ResponsiveGridCol(
               xs: 12,
-              md: 4,
+              md: 6,
               lg: 4,
               child: ViewUserLocation(location: user.location),
             ),
             ResponsiveGridCol(
               xs: 12,
-              md: 4,
+              md: 6,
               lg: 4,
               child: ViewUserContact(user:user)
             )
@@ -87,25 +87,19 @@ class ViewUserPictureAndName extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              height: 80.0,
-              width: 80.0,
-              margin: EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
-              child:CircleAvatar(
-                backgroundImage: NetworkImage(user.picture.large),
-              ),
-            ),
-            Text(
-              user.name.title + ' ' + user.name.first + ' ' + user.name.last,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ],
+        Container(
+          height: 80.0,
+          width: 80.0,
+          margin: EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
+          child:CircleAvatar(
+            backgroundImage: NetworkImage(user.picture.large),
+          ),
+        ),
+        Text(
+          user.name.title + ' ' + user.name.first + ' ' + user.name.last,
+          style: TextStyle(
+              fontWeight: FontWeight.bold
+          ),
         ),
         Container(
           height: 40.0,

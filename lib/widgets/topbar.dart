@@ -28,23 +28,28 @@ class _TopBarState extends State<TopBar> {
               height: 50.0,
               margin: EdgeInsets.all(10.0),
               child: Text('Flutter Web with Redux',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold
-                )
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  )
               ),
             ),
             Expanded(
               child: Text(''),
             ),
-            Container(
-              height: 50.0,
-              margin: EdgeInsets.all(10.0),
-              child: Text('A simply application that show a boilerplate in Redux',
+            Flexible(
+              child: Container(
+                height: 50.0,
+                margin: EdgeInsets.all(10.0),
+                child: Text(
+                  'A simply application that shows a boilerplate in Redux',
                   style: TextStyle(
                       fontStyle: FontStyle.italic
-                  )
+                  ),
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
+            )
           ],
         ),
       ],

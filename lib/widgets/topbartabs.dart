@@ -16,7 +16,7 @@ class TopBarTabs extends StatelessWidget {
             children: <Widget>[
               Container(
                 height: 35.0,
-                width: constraints.maxWidth/4,
+                width: 150.0,
                 child: FlatButton(
                   onPressed: () => StoreProvider.of<AppState>(context).dispatch(FetchUser()),
                   color: Colors.deepOrange,
