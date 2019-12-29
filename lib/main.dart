@@ -24,6 +24,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Web with Redux',
       theme: ThemeData(
+
           primarySwatch: Colors.orange,
           dividerColor: Colors.grey[300],
           primaryColor: Colors.orange,
@@ -33,7 +34,6 @@ class App extends StatelessWidget {
       home: StoreProvider<AppState>(
           store: store,
           child: Scaffold(
-            backgroundColor: Theme.of(context).backgroundColor,
             body: HomePage(),
           )
       ),
