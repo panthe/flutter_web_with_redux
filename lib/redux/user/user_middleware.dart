@@ -14,9 +14,13 @@ Middleware<AppState> createUserMiddleware() {
     if (action is FetchUser) {
 
       try {
+        //Set UserState isFetching to true
+        store.dispatch(FetchingUser(isFetching: true));
+
+        //Call API URL
         var response = await http.get(config.url);
+
         if (response.statusCode == 200) {
-          debugPrint(response.body);
           // If server returns an OK response, parse the JSON.
           APIResponse res = APIResponse.fromJson(convert.jsonDecode(response.body));
           if (res.users != null && res.users.length>0){
@@ -24,15 +28,18 @@ Middleware<AppState> createUserMiddleware() {
 
             store.dispatch(SetUser(user: user));
           }else{
+            // If that response doesn't contains users, throw an error.
             throw Exception('Failed to load users');
           }
         } else {
-          // If that response was not OK, throw an error.
+          // If the response was not OK, throw an error.
           throw Exception('Failed to load users');
         }
       } catch (error) {
+        //Dispatch ShowError action and set error description
         store.dispatch(ShowError(errorCode: error.hashCode, errorDescription: error.toString()));
       }
+      //Set UserState isFetching to false
       store.dispatch(FetchingUser(isFetching: false));
     }
 

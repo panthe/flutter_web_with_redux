@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_web_with_redux/redux/user/user_state.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:flutter_web_with_redux/models/location.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,14 +23,20 @@ class GridUsers extends StatelessWidget {
                   bottom: 50.0
               ),
               color: Theme.of(context).backgroundColor,
-              child: StoreConnector<AppState, User>(
-                  converter: (store) => store.state.userState.user,
-                  builder: (BuildContext context, User user){
+              child: StoreConnector<AppState, UserState>(
+                  converter: (store) => store.state.userState,
+                  builder: (BuildContext context, UserState userState){
+                    bool isFetching = userState.isFetching;
+                    User user = userState.user;
 
-                    final card = ViewUser(user: user);
-                    return SingleChildScrollView(
-                      child: card
-                    );
+                    return isFetching ?
+                      Center(
+                        child: CircularProgressIndicator()
+                      )
+                      :
+                      SingleChildScrollView(
+                        child: ViewUser(user:user)
+                      );
                   }
               )
           );
