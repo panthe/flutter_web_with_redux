@@ -45,7 +45,9 @@ class ViewUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return user == null ? Text('No user data found')
+    return user == null ? Center(
+          child: Text('No user data found')
+        )
         : Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
