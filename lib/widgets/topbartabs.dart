@@ -8,7 +8,7 @@ class TopBarTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final store = StoreProvider.of<AppState>(context);
     return LayoutBuilder(
         builder: (context, constraints) {
           return Row(
@@ -18,7 +18,7 @@ class TopBarTabs extends StatelessWidget {
                 height: 35.0,
                 width: 150.0,
                 child: FlatButton(
-                  onPressed: () => StoreProvider.of<AppState>(context).dispatch(FetchUser()),
+                  onPressed: () => store.dispatch(FetchUser()),
                   color: Colors.deepOrange,
                   child: Text(
                     "FETCH USER",
