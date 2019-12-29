@@ -15,7 +15,6 @@ class ErrorState{
     this.errorDescription
   });
 
-
   ErrorState copyWith({
     BuildContext context,
     bool isShowing,

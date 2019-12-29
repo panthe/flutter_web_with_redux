@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-class ShowMessage {
+class SetMessageContext {
   final BuildContext context;
+
+  SetMessageContext({
+    @required this.context,
+  });
+}
+
+class ShowMessage {
   final int messageCode;
   final String messageDescription;
 
   ShowMessage({
-    @required this.context,
     @required this.messageCode,
     @required this.messageDescription,
   });
@@ -18,11 +24,5 @@ class ShowMessage {
   }
 }
 
-class DismissMessage {
-  final BuildContext context;
-
-  DismissMessage({
-    @required this.context
-  });
-}
+class DismissMessage {}
 

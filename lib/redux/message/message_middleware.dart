@@ -5,14 +5,11 @@ import 'message_actions.dart';
 
 
 Middleware<AppState> createMessageMiddleware() {
-  //debugPrint('createMessageMiddleware');
   return (Store<AppState> store, dynamic action, NextDispatcher next) async {
-    // //debugPrint("Action " + action.toString());
 
     if (action is ShowMessage) {
-      //debugPrint('ShowMessage');
 
-      Scaffold.of(action.context).showSnackBar(
+      Scaffold.of(store.state.messageState.context).showSnackBar(
           SnackBar(
             backgroundColor: Colors.red,
             content:new Text(action.messageDescription),
@@ -27,7 +24,7 @@ Middleware<AppState> createMessageMiddleware() {
     }
 
     if (action is DismissMessage){
-      Scaffold.of(action.context).hideCurrentSnackBar();
+      Scaffold.of(store.state.messageState.context).hideCurrentSnackBar();
     }
 
     next(action);

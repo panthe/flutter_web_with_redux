@@ -26,7 +26,6 @@ Middleware<AppState> createUserMiddleware() {
           }else{
             throw Exception('Failed to load users');
           }
-
         } else {
           // If that response was not OK, throw an error.
           throw Exception('Failed to load users');

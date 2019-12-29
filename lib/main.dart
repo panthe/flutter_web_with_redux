@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_with_redux/redux/error/error_actions.dart';
 
 // Redux
 import 'package:redux/redux.dart';
@@ -18,6 +19,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Web with Redux',
@@ -29,8 +31,11 @@ class App extends StatelessWidget {
           cardColor: Colors.white
       ),
       home: StoreProvider<AppState>(
-        store: store,
-        child: HomePage(),
+          store: store,
+          child: Scaffold(
+            backgroundColor: Theme.of(context).backgroundColor,
+            body: HomePage(),
+          )
       ),
       routes: {
         '/home': (context) => HomePage(),

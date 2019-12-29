@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_web_with_redux/redux/app/app_state.dart';
+import 'package:flutter_web_with_redux/redux/error/error_actions.dart';
 
 //Widgets
 import '../widgets/topbar.dart';
@@ -23,9 +26,8 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: SingleChildScrollView(
+    StoreProvider.of<AppState>(context).dispatch(SetErrorContext(context: context));
+    return SingleChildScrollView(
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -49,7 +51,7 @@ class _HomePageState extends State<HomePage> {
               )
             )
           ),
-      )
+
     );
   }
 }

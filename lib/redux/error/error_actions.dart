@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-class ShowError {
+class SetErrorContext {
   final BuildContext context;
+
+
+  SetErrorContext({
+    @required this.context,
+  });
+}
+
+class ShowError {
   final int errorCode;
   final String errorDescription;
 
 
   ShowError({
-    @required this.context,
     @required this.errorCode,
     @required this.errorDescription,
   });
@@ -19,11 +26,5 @@ class ShowError {
   }
 }
 
-class DismissError {
-  final BuildContext context;
-
-  DismissError({
-    @required this.context
-  });
-}
+class DismissError {}
 

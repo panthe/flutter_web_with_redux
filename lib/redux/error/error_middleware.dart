@@ -4,14 +4,11 @@ import '../app/app_state.dart';
 import 'error_actions.dart';
 
 Middleware<AppState> createErrorMiddleware() {
-  //debugPrint('createErrorMiddleware');
   return (Store<AppState> store, dynamic action, NextDispatcher next) async {
-    // //debugPrint("Action " + action.toString());
 
     if (action is ShowError) {
-      //debugPrint('ShowError');
 
-     Scaffold.of(action.context).showSnackBar(
+     Scaffold.of(store.state.errorState.context).showSnackBar(
           SnackBar(
             backgroundColor: Colors.red,
             content:new Text(action.errorDescription),
@@ -26,7 +23,7 @@ Middleware<AppState> createErrorMiddleware() {
     }
 
     if (action is DismissError){
-      Scaffold.of(action.context).hideCurrentSnackBar();
+      Scaffold.of(store.state.errorState.context).hideCurrentSnackBar();
     }
 
     next(action);

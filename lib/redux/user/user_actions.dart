@@ -10,13 +10,7 @@ class FetchingUser {
   });
 }
 
-class FetchUser {
-  BuildContext context;
-
-  FetchUser({
-    @required this.context,
-  });
-}
+class FetchUser {}
 
 class SetUser {
   final User user;

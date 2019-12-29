@@ -15,7 +15,6 @@ class MessageState{
     this.messageDescription
   });
 
-
   MessageState copyWith({
     BuildContext context,
     bool isShowing,
