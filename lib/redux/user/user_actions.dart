@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_web_with_redux/models/user.dart';
 
 class FetchingUser {
@@ -8,6 +7,12 @@ class FetchingUser {
   FetchingUser({
     @required this.isFetching,
   });
+
+  toJson() {
+    return {
+      'isFetching': isFetching,
+    };
+  }
 }
 
 class FetchUser {}
@@ -18,6 +23,12 @@ class SetUser {
   SetUser({
     @required this.user,
   });
+
+  toJson() {
+    return {
+      'user': user.toJson(),
+    };
+  }
 }
 
 class SavingUser {
@@ -26,4 +37,10 @@ class SavingUser {
   SavingUser({
     @required this.isSaving,
   });
+
+  toJson() {
+    return {
+      'isSaving': isSaving,
+    };
+  }
 }

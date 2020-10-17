@@ -9,39 +9,34 @@ import 'package:flutter_web_with_redux/redux/app/app_state.dart';
 import 'package:flutter_web_with_redux/models/user.dart';
 
 class GridUsers extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      return Container(
+        width: constraints.maxWidth,
+        height: constraints.maxHeight,
+        padding: EdgeInsets.only(
+          top: 30.0,
+          bottom: 50.0,
+        ),
+        color: Theme.of(context).backgroundColor,
+        child: StoreConnector<AppState, UserState>(
+            distinct: true,
+            converter: (store) => store.state.userState,
+            builder: (BuildContext context, UserState userState) {
+              bool isFetching = userState.isFetching;
+              User user = userState.user;
 
-    return LayoutBuilder(
-        builder: (context, constraints) {
-          return Container(
-              width: constraints.maxWidth,
-              height: constraints.maxHeight,
-              padding: EdgeInsets.only(
-                  top: 30.0,
-                  bottom: 50.0
-              ),
-              color: Theme.of(context).backgroundColor,
-              child: StoreConnector<AppState, UserState>(
-                  converter: (store) => store.state.userState,
-                  builder: (BuildContext context, UserState userState){
-                    bool isFetching = userState.isFetching;
-                    User user = userState.user;
-
-                    return isFetching ?
-                      Center(
-                        child: CircularProgressIndicator()
-                      )
-                      :
-                      SingleChildScrollView(
-                        child: ViewUser(user:user)
-                      );
-                  }
-              )
-          );
-        }
-    );
+              return isFetching
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : SingleChildScrollView(
+                      child: ViewUser(user: user),
+                    );
+            }),
+      );
+    });
   }
 }
 
@@ -52,20 +47,18 @@ class ViewUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return user == null ? Center(
-          child: Text('No user data found')
-        )
-        : Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: ResponsiveGridRow(
-          children: [
+    return user == null
+      ? Center(child: Text('No user data found'))
+      : Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: ResponsiveGridRow(children: [
             ResponsiveGridCol(
               xs: 12,
               md: 6,
               lg: 4,
-              child: ViewUserPictureAndName(user:user)
+              child: ViewUserPictureAndName(user: user),
             ),
             ResponsiveGridCol(
               xs: 12,
@@ -77,11 +70,10 @@ class ViewUser extends StatelessWidget {
               xs: 12,
               md: 6,
               lg: 4,
-              child: ViewUserContact(user:user)
-            )
-          ]
-        )
-    );
+              child: ViewUserContact(user: user),
+            ),
+          ]),
+        );
   }
 }
 
@@ -100,24 +92,27 @@ class ViewUserPictureAndName extends StatelessWidget {
           height: 80.0,
           width: 80.0,
           margin: EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
-          child:CircleAvatar(
+          child: CircleAvatar(
             backgroundImage: NetworkImage(user.picture.large),
           ),
         ),
         Text(
           user.name.title + ' ' + user.name.first + ' ' + user.name.last,
           style: TextStyle(
-              fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
           ),
         ),
         Container(
           height: 40.0,
           width: 40.0,
           margin: EdgeInsets.symmetric(vertical: 25.0, horizontal: 25.0),
-          child:CircleAvatar(
-            backgroundColor: user.gender == 'male' ? Colors.cyan[50] : Colors.pink[100],
+          child: CircleAvatar(
+            backgroundColor:
+                user.gender == 'male' ? Colors.cyan[50] : Colors.pink[100],
             child: Icon(
-              user.gender == 'male' ? FontAwesomeIcons.male : FontAwesomeIcons.female,
+              user.gender == 'male'
+                  ? FontAwesomeIcons.male
+                  : FontAwesomeIcons.female,
               color: user.gender == 'male' ? Colors.blue : Colors.pinkAccent,
               size: 28.0,
             ),
@@ -135,94 +130,102 @@ class ViewUserLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
-            margin: EdgeInsets.only(
-                left:10.0,
-                right:10.0,
-                top:25.0,
-                bottom: 25.0
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Icon(
-                  FontAwesomeIcons.addressBook,
-                  color: Colors.blueGrey,
-                  size: 32.0,
-                ),
-              ],
-            )
+          margin: EdgeInsets.only(
+            left: 10.0,
+            right: 10.0,
+            top: 25.0,
+            bottom: 25.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Icon(
+                FontAwesomeIcons.addressBook,
+                color: Colors.blueGrey,
+                size: 32.0,
+              ),
+            ],
+          ),
         ),
         Container(
-            margin: EdgeInsets.only(
-                left: 10.0,
-                right:10.0,
-                top:25.0,
-                bottom: 25.0
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Country',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),
+          margin: EdgeInsets.only(
+            left: 10.0,
+            right: 10.0,
+            top: 25.0,
+            bottom: 25.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Country',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                Text('State',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),
+              ),
+              Text(
+                'State',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                Text('City',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),
+              ),
+              Text(
+                'City',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                Text('Street',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),
+              ),
+              Text(
+                'Street',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            )
+              ),
+            ],
+          ),
         ),
         Container(
-            margin: EdgeInsets.only(
-                left: 10.0,
-                right:10.0,
-                top:25.0,
-                bottom: 25.0
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(location.country,
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal
-                  ),
+          margin: EdgeInsets.only(
+            left: 10.0,
+            right: 10.0,
+            top: 25.0,
+            bottom: 25.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                location.country,
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
                 ),
-                Text(location.state,
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal
-                  ),
+              ),
+              Text(
+                location.state,
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
                 ),
-                Text(location.city,
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal
-                  ),
+              ),
+              Text(
+                location.city,
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
                 ),
-                Text(location.street.name + ' ' + location.street.number.toString(),
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal
-                  ),
+              ),
+              Text(
+                location.street.name + ' ' + location.street.number.toString(),
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
                 ),
-              ],
-            )
-        )
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -235,86 +238,87 @@ class ViewUserContact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
-            margin: EdgeInsets.only(
-                left:10.0,
-                right:10.0,
-                top:25.0,
-                bottom: 25.0
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Icon(
-                  FontAwesomeIcons.solidAddressBook,
-                  color: Colors.blueGrey,
-                  size: 32.0,
-                ),
-              ],
-            )
+          margin: EdgeInsets.only(
+            left: 10.0,
+            right: 10.0,
+            top: 25.0,
+            bottom: 25.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Icon(
+                FontAwesomeIcons.solidAddressBook,
+                color: Colors.blueGrey,
+                size: 32.0,
+              ),
+            ],
+          ),
         ),
         Container(
-            margin: EdgeInsets.only(
-                left: 10.0,
-                right:10.0,
-                top:25.0,
-                bottom: 25.0
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Email',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),
+          margin: EdgeInsets.only(
+            left: 10.0,
+            right: 10.0,
+            top: 25.0,
+            bottom: 25.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Email',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                Text('Phone',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),
+              ),
+              Text(
+                'Phone',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                Text('Cell',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),
+              ),
+              Text(
+                'Cell',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            )
+              ),
+            ],
+          ),
         ),
         Container(
-            margin: EdgeInsets.only(
-                left: 10.0,
-                right:10.0,
-                top:25.0,
-                bottom: 25.0
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(user.email,
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal
-                  ),
+          margin:
+              EdgeInsets.only(left: 10.0, right: 10.0, top: 25.0, bottom: 25.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                user.email,
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
                 ),
-                Text(user.phone,
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal
-                  ),
+              ),
+              Text(
+                user.phone,
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
                 ),
-                Text(user.cell,
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal
-                  ),
-                )
-              ],
-            )
-        )
+              ),
+              Text(
+                user.cell,
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                ),
+              )
+            ],
+          ),
+        ),
       ],
     );
   }
 }
-

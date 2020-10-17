@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
-class SetErrorContext {
-  final BuildContext context;
-
-
-  SetErrorContext({
-    @required this.context,
-  });
-}
-
-class ShowError {
-  final int errorCode;
+class SetError {
+  final bool isShowing;
+  final String errorCode;
   final String errorDescription;
 
 
-  ShowError({
+  SetError({
+    @required this.isShowing,
     @required this.errorCode,
     @required this.errorDescription,
   });
 
-  @override
-  String toString() {
-    return 'ShowError{errorCode: $errorCode, errorDescription: $errorDescription}';
+  toJson() {
+    return {
+      'isShowing': isShowing,
+      'errorCode': errorCode,
+      'errorDescription': errorDescription
+    };
   }
 }
 

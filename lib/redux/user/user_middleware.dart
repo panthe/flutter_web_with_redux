@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import 'package:flutter_web_with_redux/redux/config.dart' as config;
+import 'package:flutter_web_with_redux/config/config.dart' as config;
 import 'package:flutter_web_with_redux/redux/app/app_state.dart';
 import 'package:flutter_web_with_redux/redux/error/error_actions.dart';
 import 'package:flutter_web_with_redux/models/user.dart';
 import 'package:flutter_web_with_redux/models/apiResponse.dart';
-import 'user_actions.dart';
+import 'package:flutter_web_with_redux/redux/user/user_actions.dart';
 
 Middleware<AppState> createUserMiddleware() {
   return (Store store, dynamic action, NextDispatcher next) async {
@@ -37,7 +36,7 @@ Middleware<AppState> createUserMiddleware() {
         }
       } catch (error) {
         //Dispatch ShowError action and set error description
-        store.dispatch(ShowError(errorCode: error.hashCode, errorDescription: error.toString()));
+        store.dispatch(SetError(errorCode: "USR001", errorDescription: error.toString()));
       }
       //Set UserState isFetching to false
       store.dispatch(FetchingUser(isFetching: false));

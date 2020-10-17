@@ -3,26 +3,22 @@ import 'package:meta/meta.dart';
 
 @immutable
 class MessageState{
-  final BuildContext context;
   final bool isShowing;
-  final int messageCode;
+  final String messageCode;
   final String messageDescription;
 
   MessageState({
-    this.context,
     this.isShowing,
     this.messageCode,
     this.messageDescription
   });
 
   MessageState copyWith({
-    BuildContext context,
     bool isShowing,
-    int messageCode,
+    String messageCode,
     String messageDescription
   }){
-    return new MessageState(
-        context: context ?? this.context,
+    return MessageState(
         isShowing: isShowing ?? this.isShowing,
         messageCode: messageCode ?? this.messageCode,
         messageDescription: messageDescription ?? this.messageDescription
@@ -30,11 +26,37 @@ class MessageState{
   }
 
   factory MessageState.initial(){
-    return new MessageState(
-      context: null,
-      isShowing: false,
-      messageCode: 0,
-      messageDescription: ""
+    return MessageState(
+        isShowing: false,
+        messageCode: null,
+        messageDescription: null
     );
   }
+
+  static MessageState fromJson(Map<String, dynamic> json) {
+    return MessageState(
+      isShowing: json['isShowing'] == null ? false : json['isShowing'],
+      messageCode: json['messageCode'],
+      messageDescription: json['messageDescription'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'isShowing': isShowing,
+    'messageCode': messageCode,
+    'messageDescription': messageDescription,
+  };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is MessageState &&
+              runtimeType == other.runtimeType &&
+              isShowing == other.isShowing &&
+              messageCode == other.messageCode &&
+              messageDescription == other.messageDescription;
+
+  @override
+  int get hashCode =>
+      isShowing.hashCode ^ messageCode.hashCode ^ messageDescription.hashCode;
 }

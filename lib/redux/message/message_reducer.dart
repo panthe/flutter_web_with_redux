@@ -1,31 +1,19 @@
 import 'package:redux/redux.dart';
-import './message_state.dart';
-import './message_actions.dart';
+import 'package:flutter_web_with_redux/redux/message/message_state.dart';
+import 'package:flutter_web_with_redux/redux/message/message_actions.dart';
 
 final messageReducer = combineReducers<MessageState>([
-  TypedReducer<MessageState,SetMessageContext>(_setting),
-  TypedReducer<MessageState,ShowMessage>(_showing),
+  TypedReducer<MessageState,SetMessage>(_setting),
   TypedReducer<MessageState,DismissMessage>(_dismiss),
 ]);
 
-MessageState _setting(MessageState state, SetMessageContext action){
+MessageState _setting(MessageState state, SetMessage action){
   return state.copyWith(
-      context: action.context
-  );
-}
-
-MessageState _showing(MessageState state, ShowMessage action){
-  return state.copyWith(
-      isShowing: true,
+      isShowing: action.isShowing,
       messageCode: action.messageCode,
-      messageDescription: action.messageDescription
-  );
+      messageDescription: action.messageDescription);
 }
 
 MessageState _dismiss(MessageState state, DismissMessage action){
-  return state.copyWith(
-      isShowing: false,
-      messageCode: 0,
-      messageDescription: ""
-  );
+  return MessageState.initial();
 }

@@ -1,21 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TopBar extends StatefulWidget {
-
+class TopBar extends StatelessWidget {
   TopBar({Key key}) : super(key: key);
-
-  @override
-  _TopBarState createState() => _TopBarState();
-}
-
-class _TopBarState extends State<TopBar> {
-
-  @override
-  void initState() {
-    super.initState();
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +14,11 @@ class _TopBarState extends State<TopBar> {
             Container(
               height: 50.0,
               margin: EdgeInsets.all(10.0),
-              child: Text('Flutter Web with Redux',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold
-                  )
+              child: Text(
+                'Flutter Web with Redux',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Expanded(
@@ -43,7 +31,7 @@ class _TopBarState extends State<TopBar> {
                 child: Text(
                   'A simply application that shows a boilerplate in Redux',
                   style: TextStyle(
-                      fontStyle: FontStyle.italic
+                    fontStyle: FontStyle.italic,
                   ),
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,

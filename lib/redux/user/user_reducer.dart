@@ -1,6 +1,6 @@
 import 'package:redux/redux.dart';
-import 'user_actions.dart';
-import 'user_state.dart';
+import 'package:flutter_web_with_redux/redux/user/user_actions.dart';
+import 'package:flutter_web_with_redux/redux/user/user_state.dart';
 
 final userReducer = combineReducers<UserState>([
     TypedReducer<UserState, FetchingUser>(_fetching),
