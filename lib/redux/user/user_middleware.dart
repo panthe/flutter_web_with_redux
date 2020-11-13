@@ -16,7 +16,7 @@ Middleware<AppState> createUserMiddleware() {
         //Set UserState isFetching to true
         store.dispatch(FetchingUser(isFetching: true));
 
-        //Call API URL
+        //Call API URL (ONLY FOR EXAMPLE USE A BETTER WAY LIKE DIO)
         var response = await http.get(config.url);
 
         if (response.statusCode == 200) {
@@ -27,16 +27,16 @@ Middleware<AppState> createUserMiddleware() {
 
             store.dispatch(SetUser(user: user));
           }else{
-            // If that response doesn't contains users, throw an error.
-            throw Exception('Failed to load users');
+            //Dispatch ShowError action and set error description
+            store.dispatch(SetError(errorCode: "USR003", errorDescription: 'Users not found!'));
           }
         } else {
-          // If the response was not OK, throw an error.
-          throw Exception('Failed to load users');
+          //Dispatch ShowError action and set error description
+          store.dispatch(SetError(errorCode: "USR002", errorDescription: 'Failed to load users'));
         }
       } catch (error) {
         //Dispatch ShowError action and set error description
-        store.dispatch(SetError(errorCode: "USR001", errorDescription: error.toString()));
+        store.dispatch(SetError(errorCode: "USR001", errorDescription: '$error'));
       }
       //Set UserState isFetching to false
       store.dispatch(FetchingUser(isFetching: false));

@@ -21,20 +21,23 @@ class GridUsers extends StatelessWidget {
         ),
         color: Theme.of(context).backgroundColor,
         child: StoreConnector<AppState, UserState>(
-            distinct: true,
-            converter: (store) => store.state.userState,
-            builder: (BuildContext context, UserState userState) {
-              bool isFetching = userState.isFetching;
-              User user = userState.user;
+          distinct: true,
+          converter: (store) => store.state.userState,
+          builder: (BuildContext context, UserState userState) {
+            bool isFetching = userState.isFetching;
+            User user = userState.user;
 
-              return isFetching
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : SingleChildScrollView(
-                      child: ViewUser(user: user),
-                    );
-            }),
+            return isFetching
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+                  child: ViewUser(
+                    user: user,
+                  ),
+                );
+          },
+        ),
       );
     });
   }
@@ -48,32 +51,32 @@ class ViewUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return user == null
-      ? Center(child: Text('No user data found'))
-      : Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          child: ResponsiveGridRow(children: [
-            ResponsiveGridCol(
-              xs: 12,
-              md: 6,
-              lg: 4,
-              child: ViewUserPictureAndName(user: user),
+        ? Center(child: Text('No user data found'))
+        : Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
             ),
-            ResponsiveGridCol(
-              xs: 12,
-              md: 6,
-              lg: 4,
-              child: ViewUserLocation(location: user.location),
-            ),
-            ResponsiveGridCol(
-              xs: 12,
-              md: 6,
-              lg: 4,
-              child: ViewUserContact(user: user),
-            ),
-          ]),
-        );
+            child: ResponsiveGridRow(children: [
+              ResponsiveGridCol(
+                xs: 12,
+                md: 6,
+                lg: 4,
+                child: ViewUserPictureAndName(user: user),
+              ),
+              ResponsiveGridCol(
+                xs: 12,
+                md: 6,
+                lg: 4,
+                child: ViewUserLocation(location: user.location),
+              ),
+              ResponsiveGridCol(
+                xs: 12,
+                md: 6,
+                lg: 4,
+                child: ViewUserContact(user: user),
+              ),
+            ]),
+          );
   }
 }
 

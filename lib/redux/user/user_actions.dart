@@ -26,7 +26,7 @@ class SetUser {
 
   toJson() {
     return {
-      'user': user.toJson(),
+      'user': user?.toJson(),
     };
   }
 }

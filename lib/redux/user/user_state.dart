@@ -18,11 +18,11 @@ class UserState {
     bool isSaving,
     User user
   }){
-   return new UserState(
-     isFetching: isFetching ?? this.isFetching,
-     isSaving: isSaving ?? this.isSaving,
-     user: user ?? this.user
-   );
+    return new UserState(
+        isFetching: isFetching ?? this.isFetching,
+        isSaving: isSaving ?? this.isSaving,
+        user: user ?? this.user
+    );
   }
 
   factory UserState.initial(){
@@ -46,7 +46,7 @@ class UserState {
   Map<String, dynamic> toJson() => {
     'isFetching': isFetching,
     'isSaving': isSaving,
-    'user': user.toJson(),
+    'user': user?.toJson(),
   };
 
   @override
