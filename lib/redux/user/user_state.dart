@@ -18,7 +18,7 @@ class UserState {
     bool isSaving,
     User user
   }){
-    return new UserState(
+    return UserState(
         isFetching: isFetching ?? this.isFetching,
         isSaving: isSaving ?? this.isSaving,
         user: user ?? this.user
@@ -26,7 +26,7 @@ class UserState {
   }
 
   factory UserState.initial(){
-    return new UserState(
+    return UserState(
       isFetching: false,
       isSaving: false,
       user: null

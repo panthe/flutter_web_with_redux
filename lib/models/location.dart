@@ -22,21 +22,21 @@ class Location {
 
   Location.fromJson(Map<String, dynamic> json) {
     street =
-    json['street'] != null ? new Street.fromJson(json['street']) : null;
+    json['street'] != null ? Street.fromJson(json['street']) : null;
     city = json['city'];
     state = json['state'];
     country = json['country'];
     postcode = json['postcode'];
     coordinates = json['coordinates'] != null
-        ? new Coordinates.fromJson(json['coordinates'])
+        ? Coordinates.fromJson(json['coordinates'])
         : null;
     timezone = json['timezone'] != null
-        ? new Timezone.fromJson(json['timezone'])
+        ? Timezone.fromJson(json['timezone'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     if (this.street != null) {
       data['street'] = this.street.toJson();
     }

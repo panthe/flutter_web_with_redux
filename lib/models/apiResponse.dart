@@ -9,16 +9,16 @@ class APIResponse {
 
   APIResponse.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
-      users = new List<User>();
+      users = List<User>();
       json['results'].forEach((v) {
-        users.add(new User.fromJson(v));
+        users.add(User.fromJson(v));
       });
     }
-    info = json['info'] != null ? new Info.fromJson(json['info']) : null;
+    info = json['info'] != null ? Info.fromJson(json['info']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     if (this.users != null) {
       data['results'] = this.users.map((v) => v.toJson()).toList();
     }
