@@ -11,7 +11,6 @@ import 'package:flutter_web_with_redux/redux/user/user_actions.dart';
 Middleware<AppState> createUserMiddleware() {
   return (Store store, dynamic action, NextDispatcher next) async {
     if (action is FetchUser) {
-
       try {
         //Set UserState isFetching to true
         store.dispatch(FetchingUser(isFetching: true));
@@ -21,27 +20,34 @@ Middleware<AppState> createUserMiddleware() {
 
         if (response.statusCode == 200) {
           // If server returns an OK response, parse the JSON.
-          APIResponse res = APIResponse.fromJson(convert.jsonDecode(response.body));
-          if (res.users != null && res.users.length>0){
+          APIResponse res =
+              APIResponse.fromJson(convert.jsonDecode(response.body));
+          if (res.users != null && res.users.length > 0) {
             User user = res.users[0];
 
             store.dispatch(SetUser(user: user));
-          }else{
+          } else {
             //Dispatch ShowError action and set error description
-            store.dispatch(SetError(errorCode: "USR003", errorDescription: 'Users not found!'));
+            store.dispatch(SetError(
+                isShowing: true,
+                errorCode: "USR003",
+                errorDescription: 'Users not found!'));
           }
         } else {
           //Dispatch ShowError action and set error description
-          store.dispatch(SetError(errorCode: "USR002", errorDescription: 'Failed to load users'));
+          store.dispatch(SetError(
+              isShowing: true,
+              errorCode: "USR002",
+              errorDescription: 'Failed to load users'));
         }
       } catch (error) {
         //Dispatch ShowError action and set error description
-        store.dispatch(SetError(errorCode: "USR001", errorDescription: '$error'));
+        store.dispatch(SetError(
+            isShowing: true, errorCode: "USR001", errorDescription: '$error'));
       }
       //Set UserState isFetching to false
       store.dispatch(FetchingUser(isFetching: false));
     }
-
     next(action);
   };
 }

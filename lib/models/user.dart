@@ -1,5 +1,5 @@
 import 'package:redux/redux.dart';
-import 'package:flutter_redux/flutter_redux.dart';
+
 import 'package:flutter_web_with_redux/redux/app/app_state.dart';
 
 import 'name.dart';
@@ -25,35 +25,33 @@ class User {
 
   User(
       {this.gender,
-        this.name,
-        this.location,
-        this.email,
-        this.login,
-        this.dob,
-        this.registered,
-        this.phone,
-        this.cell,
-        this.id,
-        this.picture,
-        this.nat});
+      this.name,
+      this.location,
+      this.email,
+      this.login,
+      this.dob,
+      this.registered,
+      this.phone,
+      this.cell,
+      this.id,
+      this.picture,
+      this.nat});
 
   User.fromJson(Map<String, dynamic> json) {
     gender = json['gender'];
     name = json['name'] != null ? Name.fromJson(json['name']) : null;
-    location = json['location'] != null
-        ? Location.fromJson(json['location'])
-        : null;
+    location =
+        json['location'] != null ? Location.fromJson(json['location']) : null;
     email = json['email'];
     login = json['login'] != null ? Login.fromJson(json['login']) : null;
     dob = json['dob'] != null ? Dob.fromJson(json['dob']) : null;
-    registered = json['registered'] != null
-        ? Dob.fromJson(json['registered'])
-        : null;
+    registered =
+        json['registered'] != null ? Dob.fromJson(json['registered']) : null;
     phone = json['phone'];
     cell = json['cell'];
     id = json['id'] != null ? Id.fromJson(json['id']) : null;
     picture =
-    json['picture'] != null ? Picture.fromJson(json['picture']) : null;
+        json['picture'] != null ? Picture.fromJson(json['picture']) : null;
     nat = json['nat'];
   }
 

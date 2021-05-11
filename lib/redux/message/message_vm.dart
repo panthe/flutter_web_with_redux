@@ -11,9 +11,8 @@ class MessageViewModel {
 
   static MessageViewModel fromStore(Store<AppState> store) {
     return MessageViewModel(
-      dismissMessage: () => store.dispatch(DismissMessage()),
-      messageState: store.state.messageState
-    );
+        dismissMessage: () => store.dispatch(DismissMessage()),
+        messageState: store.state.messageState);
   }
 
   @override
@@ -21,7 +20,6 @@ class MessageViewModel {
       identical(this, other) ||
       other is MessageViewModel &&
           runtimeType == other.runtimeType &&
-          dismissMessage == other.dismissMessage &&
           messageState == other.messageState;
 
   @override
