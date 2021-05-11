@@ -8,9 +8,6 @@ import 'package:flutter_web_with_redux/models/user.dart';
 import 'package:flutter_web_with_redux/models/apiResponse.dart';
 import 'package:flutter_web_with_redux/redux/user/user_actions.dart';
 
-import '../message/message_actions.dart';
-import '../message/message_actions.dart';
-
 Middleware<AppState> createUserMiddleware() {
   return (Store store, dynamic action, NextDispatcher next) async {
     if (action is FetchUser) {
